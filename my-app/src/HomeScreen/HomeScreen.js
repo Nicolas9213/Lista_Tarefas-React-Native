@@ -1,13 +1,23 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { Button, Text, View } from "react-native-web";
+import { StyleSheet, Text, View } from "react-native-web";
 
-export default HomeScreen() {
-
+function DetailsScreen() {
     return (
-        <View style={StyleSheet.home}>
-            <Text>Home Screen</Text>
-            <Button>Add List</Button>
-        </View>
-    )
-}
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+  
+  const Stack = createNativeStackNavigator();
+  
+  function App() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
