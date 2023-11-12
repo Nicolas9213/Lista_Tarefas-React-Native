@@ -6,9 +6,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 export function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <View style={styles.texts}>
+        <Text style={styles.title}>Bem vindo a Your Lists!</Text>
+        <Text style={styles.subtitle}>O seu app de listas</Text>
+      </View>
       <Button
-        title="AddList"
+        title="Adicionar Listas"
         onPress={() => navigation.navigate('AddList')}
       />
     </View>
@@ -21,6 +24,9 @@ const styles = StyleSheet.create ({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around'
+  },
+  texts: {
+    alignItems: 'center'
   }
 })
