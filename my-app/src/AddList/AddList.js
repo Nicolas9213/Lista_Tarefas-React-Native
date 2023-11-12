@@ -5,28 +5,28 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export function AddList({navigation}) {
-  const [task, setTask] = useState([]);
-  const [newTask, setNewTask] = useState('');
+  const [list, setlist] = useState([]);
+  const [newlist, setNewlist] = useState('');
 
-  async function addTask() {
+  async function addlist() {
 
-    if (newTask === '') {
+    if (newlist === '') {
       return;
     }
 
-    const search = task.filter(task => task === newTask);
+    const search = list.filter(list => list === newlist);
 
     if (search.length != 0) {
       Alert.alert("Tarefa repetida!")
       return;
     }
 
-    setTask([ ...task, newTask]);
-    setNewTask('');
+    setlist([ ...list, newlist]);
+    setNewlist('');
     Keyboard.dismiss();
   }
 
-  async function removeTask(item) {
+  async function removelist(item) {
     Alert.alert(
       "Deletar item",
       "Tem certeza que deseja remover essa tarefa?",
@@ -39,7 +39,7 @@ export function AddList({navigation}) {
           style: 'cancel'
           },
             {
-              text: "OK", onPress: () => setTask(task.filter(tasks => tasks != item))
+              text: "OK", onPress: () => setlist(list.filter(lists => lists != item))
             }
       ],
       { cancelable: false }
@@ -48,10 +48,10 @@ export function AddList({navigation}) {
 
   useEffect(() => {
     async function loadData() {
-      const task = await AsyncStorage.getItem("task");
+      const list = await AsyncStorage.getItem("list");
 
-      if (task) {
-        setTask(JSON.parse(task));
+      if (list) {
+        setlist(JSON.parse(list));
       }
     }
     loadData();
@@ -59,10 +59,10 @@ export function AddList({navigation}) {
 
   useEffect(() => {
     async function saveData() {
-      AsyncStorage.setItem("task", JSON.stringify(task))
+      AsyncStorage.setItem("list", JSON.stringify(list))
     }
     saveData();
-  }, [task]);
+  }, [list]);
 
     return (
         <>
@@ -70,13 +70,17 @@ export function AddList({navigation}) {
             <View style={styles.Body}>
               <FlatList 
               style={styles.FlatList}
-              data={task}
+              data={list}
               keyExtractor={item => item.toString()}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View style={styles.ContainerView}>
-                  <Text style={styles.Text}>{item}</Text>
-                  <TouchableOpacity onPress={() => removeTask(item)}>
+                  <TouchableOpacity onPress={() => navigation.navigate('TaskDetails', { list: item })}>
+                    <View>
+                      <Text style={styles.Text}>{item}</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => removelist(item)}>
                     <Text>Remove</Text>
                   </TouchableOpacity>
                 </View>
@@ -88,12 +92,12 @@ export function AddList({navigation}) {
               style={styles.Input} 
               placeholderTextColor="#999" 
               autoCorrect={true} 
-              placeholder="Adicione uma tarefa"
+              placeholder="Adicione uma lista"
               maxLength={25}
-              onChangeText={text => setNewTask(text)}
-              value={newTask}
+              onChangeText={text => setNewlist(text)}
+              value={newlist}
               />
-              <TouchableOpacity style={styles.Button} onPress={() => addTask()}>
+              <TouchableOpacity style={styles.Button} onPress={() => addlist()}>
                 <Text>Add</Text>
               </TouchableOpacity>
             </View>
