@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export function AddList({navigation}) {
-  const [list, setlist] = useState([]);
+  const [list, setlist] = useState(new Array());
   const [newlist, setNewlist] = useState('');
 
   async function addlist() {
@@ -75,7 +75,7 @@ export function AddList({navigation}) {
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View style={styles.ContainerView}>
-                  <TouchableOpacity onPress={() => navigation.navigate('TaskDetails', { list: item })}>
+                  <TouchableOpacity onPress={() => navigation.navigate('List Details', { list: item })}>
                     <View>
                       <Text style={styles.Text}>{item}</Text>
                     </View>

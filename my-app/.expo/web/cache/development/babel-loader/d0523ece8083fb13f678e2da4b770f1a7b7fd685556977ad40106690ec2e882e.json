@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from \"./TaskDetails\";","map":{"version":3,"names":["default"],"sources":["C:/Users/Aluno/Documents/GitHub/Jogo-PO/Jogo/Lista_Tarefas-React-Native/my-app/src/ListDetails/index.js"],"sourcesContent":["export { default } from './TaskDetails';"],"mappings":"AAAA,SAASA,OAAO"},"metadata":{},"sourceType":"module","externalDependencies":[]}
