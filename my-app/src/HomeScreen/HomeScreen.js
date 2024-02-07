@@ -27,6 +27,7 @@ const styles = StyleSheet.create ({
     justifyContent: 'space-around'
   },
   texts: {
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
